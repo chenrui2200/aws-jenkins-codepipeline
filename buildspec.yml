@@ -28,8 +28,7 @@ phases:
       - echo $TargetVersion
       - sed -e 's/{{CurrentVersion}}/'$CurrentVersion'/g' -e 's/{{TargetVersion}}/'$TargetVersion'/g' appspec.template.yaml > appspec.yaml
       - aws s3 cp appspec.yaml s3://aws-jenkins-codepipeline/codedeploy/appspec.yaml
-      - # 替换 github_codedeploy 为自己的codedeploy名称
-      - aws deploy create-deployment --application-name github_codedeploy --deployment-group-name github_codedeploy --s3-location bucket='aws-jenkins-codepipeline',key='codedeploy/appspec.yaml',bundleType=YAML
+      - aws deploy create-deployment --application-name github_codedeploy --deployment-group-name deploy_group --s3-location bucket='aws-jenkins-codepipeline',key='codedeploy/appspec.yaml',bundleType=YAML
 artifacts:
   type: yaml
   files:
